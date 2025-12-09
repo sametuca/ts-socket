@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Real-time chat application built with TypeScript and Socket.IO">
+  <title>TypeScript Socket.IO Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active">
+      <div class="login-container">
+        <div class="logo-section">
+          <div class="logo-icon">💬</div>
+          <h1>TypeScript Socket Chat</h1>
+          <p class="subtitle">Real-time messaging powered by Socket.IO</p>
+        </div>
+        
+        <form id="login-form" class="login-form">
+          <div class="form-group">
+            <label for="username">Choose your username</label>
+            <input 
+              type="text" 
+              id="username" 
+              placeholder="Enter username..." 
+              autocomplete="off"
+              required
+              minlength="2"
+              maxlength="20"
+            >
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span>Join Chat</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </form>
+
+        <div class="connection-status">
+          <div class="status-indicator" id="connection-indicator">
+            <span class="status-dot"></span>
+            <span id="connection-text">Connecting...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="chat-screen" class="screen">
+      <div class="chat-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <h2>💬 TS Socket Chat</h2>
+            <div class="connection-status">
+              <span class="status-dot connected"></span>
+              <span>Connected</span>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h3>Online Users <span id="user-count" class="badge">0</span></h3>
+            <ul id="users-list" class="users-list"></ul>
+          </div>
+
+          <div class="sidebar-footer">
+            <div class="current-user" id="current-user">
+              <div class="user-avatar">👤</div>
+              <div class="user-info">
+                <div class="user-name" id="current-username">Guest</div>
+                <div class="user-status">Online</div>
+              </div>
+            </div>
+            <button id="logout-btn" class="btn btn-secondary btn-sm">
+              Logout
+            </button>
+          </div>
+        </aside>
+
+        <main class="chat-main">
+          <div class="chat-header">
+            <div class="chat-info">
+              <h2>#general</h2>
+              <p class="chat-description">Welcome to the general chat room</p>
+            </div>
+            <div class="chat-actions">
+              <button class="icon-btn" id="stats-btn" title="View Stats">
+                📊
+              </button>
+            </div>
+          </div>
+
+          <div class="messages-container" id="messages-container">
+            <div class="messages-wrapper" id="messages"></div>
+            <div id="typing-indicator" class="typing-indicator hidden">
+              <span class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+              <span id="typing-text"></span>
+            </div>
+          </div>
+
+          <div class="message-input-container">
+            <form id="message-form" class="message-form">
+              <div class="input-wrapper">
+                <input 
+                  type="text" 
+                  id="message-input" 
+                  placeholder="Type a message..." 
+                  autocomplete="off"
+                  maxlength="500"
+                >
+                <div class="input-actions">
+                  <button type="button" class="icon-btn" title="Emoji">😊</button>
+                  <button type="submit" class="btn btn-primary btn-icon" title="Send">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M18 2L9 11m9-9l-6 16-3-7-7-3 16-6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script type="module" src="/main.ts"></script>
+</body>
+</html>
