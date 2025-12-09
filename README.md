@@ -9,8 +9,7 @@ npm install
 ```
 ## Running the Application
 
-### Development Mode (Recommended)
-Runs both server and client concurrently:
+### Development Mode
 ```bash
 npm run dev
 ```
